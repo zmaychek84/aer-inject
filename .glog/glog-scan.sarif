@@ -1,0 +1,396 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-19029544-8c85-439b-a350-94d057a9f329",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ arises when certain C functions, which are considered unsafe or deprecated, are used in the code. These functions can lead to security issues such as buffer overflows, format string vulnerabilities, or improper error handling. The use of `fprintf` with `stderr` and `strerror(errno)` can be problematic if not handled correctly, as it may expose sensitive error information or lead to undefined behavior if `errno` is not set properly.\n\n### General Mitigation Advice\n\n1. **Use Safer Alternatives**: Replace unsafe functions with safer alternatives that provide better error handling and security features.\n2. **Error Checking**: Always check the return values of functions and handle errors appropriately.\n3. **Input Validation**: Validate all inputs to ensure they meet expected formats and constraints.\n4. **Limit Error Information**: Avoid exposing detailed error information to end-users to prevent information leakage.\n\n### Source Code Fix Recommendation\n\nTo mitigate the vulnerability associated with `fprintf(stderr, \", %s\\n\", strerror(errno))`, consider using a safer alternative like `perror`, which automatically handles `errno` and provides a more secure way to print error messages.\n\n```cpp\n#include <cstdio>\n#include <cerrno>\n#include <cstring>\n\n// Original vulnerable code\n// fprintf(stderr, \", %s\\n\", strerror(errno));\n\n// Recommended fix\nperror(\"Error\");\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following standard libraries are required:\n\n- `<cstdio>`: For input/output operations.\n- `<cerrno>`: For error number definitions.\n- `<cstring>`: For string manipulation functions.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-8ec65f01-1e72-4209-b1a9-c72fc280322e",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ arises when certain C functions, which are considered unsafe or deprecated, are used in the code. These functions can lead to security issues such as buffer overflows, format string vulnerabilities, or improper error handling. The use of `fprintf` with `stderr` and `strerror(errno)` can be problematic if not handled correctly, as it may expose sensitive error information or lead to undefined behavior if `errno` is not set properly.\n\n### General Mitigation Advice\n\n1. **Use Safer Alternatives**: Replace unsafe functions with safer alternatives that provide better error handling and security features.\n2. **Error Checking**: Always check the return values of functions and handle errors appropriately.\n3. **Input Validation**: Validate all inputs to ensure they meet expected formats and constraints.\n4. **Limit Error Information**: Avoid exposing detailed error information to end-users to prevent information leakage.\n\n### Source Code Fix Recommendation\n\nTo mitigate the vulnerability associated with `fprintf(stderr, \", %s\\n\", strerror(errno))`, consider using a safer alternative like `perror`, which automatically handles `errno` and provides a more secure way to print error messages.\n\n```cpp\n#include <cstdio>\n#include <cerrno>\n#include <cstring>\n\n// Original vulnerable code\n// fprintf(stderr, \", %s\\n\", strerror(errno));\n\n// Recommended fix\nperror(\"Error\");\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following standard libraries are required:\n\n- `<cstdio>`: For input/output operations.\n- `<cerrno>`: For error number definitions.\n- `<cstring>`: For string manipulation functions.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-b0cce82c-eea0-40ea-ab74-effc68878c58",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when certain C functions, which are considered unsafe or deprecated, are used in the code. These functions can lead to security issues such as buffer overflows, format string vulnerabilities, or other undefined behaviors. The use of `fprintf(stderr, \"\\n\")` is not inherently dangerous, but it can be part of a pattern where unsafe functions are used without proper validation or error handling.\n\n### General Mitigation Advice\n\n1. **Avoid Deprecated Functions**: Replace deprecated or unsafe functions with safer alternatives.\n2. **Input Validation**: Always validate inputs to ensure they meet expected formats and lengths.\n3. **Error Handling**: Implement robust error handling to manage unexpected conditions gracefully.\n4. **Code Review**: Regularly review code for the use of unsafe functions and refactor as necessary.\n5. **Static Analysis Tools**: Use static analysis tools to detect the use of prohibited functions.\n\n### Source Code Fix Recommendation\n\nTo mitigate the potential issues with `fprintf(stderr, \"\\n\")`, ensure that any use of `fprintf` is necessary and that the format string is controlled. If the function is used for logging or error reporting, consider using a logging library that provides better control and security features.\n\n```cpp\n#include <iostream>\n\n// Recommended alternative using C++ streams\nint main() {\n    std::cerr << std::endl;\n    return 0;\n}\n```\n\n### Library Dependencies\n\nThe code example provided requires the following standard library:\n\n- `<iostream>`: This library is part of the C++ Standard Library and provides input and output stream objects.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n\n### Common Weakness Enumeration\n\n- [CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-4ce8bb99-bea4-43ff-bdd1-2314e2e36652",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when certain C functions, which are considered unsafe, are used in the code. These functions can lead to security issues such as buffer overflows, format string vulnerabilities, and other undefined behaviors. The function `vfprintf(stderr, fmt, ap)` is one such function that can be exploited if the format string `fmt` is not properly controlled, leading to potential security vulnerabilities.\n\n### General Mitigation Advice\n\n1. **Input Validation**: Always validate and sanitize input data before using it in format strings.\n2. **Use Safer Alternatives**: Consider using safer alternatives like `snprintf` or C++ streams which provide better type safety.\n3. **Static Analysis Tools**: Use static analysis tools to detect the use of prohibited functions and potential vulnerabilities in the code.\n4. **Code Review**: Regularly perform code reviews to ensure that unsafe functions are not used and that the code adheres to secure coding practices.\n\n### Source Code Fix Recommendation\n\nTo mitigate the vulnerability associated with `vfprintf(stderr, fmt, ap)`, ensure that the format string is not influenced by user input or is properly sanitized. Here is an example fix:\n\n```cpp\n#include <cstdarg>\n#include <cstdio>\n#include <cstring>\n\n// Safe wrapper function for vfprintf\nvoid safeVfprintf(const char* fmt, ...) {\n    // Define a list of allowed format specifiers\n    const char* allowedFormats = \"%d %s %f\";\n    \n    // Check if the format string contains only allowed specifiers\n    if (strspn(fmt, allowedFormats) != strlen(fmt)) {\n        fprintf(stderr, \"Error: Invalid format string\\n\");\n        return;\n    }\n\n    va_list args;\n    va_start(args, fmt);\n    vfprintf(stderr, fmt, args);\n    va_end(args);\n}\n\nint main() {\n    // Example usage\n    safeVfprintf(\"%s %d\\n\", \"Test\", 123);\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code example, the following standard libraries are required:\n\n- `<cstdarg>`: For handling variable argument lists.\n- `<cstdio>`: For input and output operations.\n- `<cstring>`: For string manipulation functions.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-134: Use of Externally-Controlled Format String](https://cwe.mitre.org/data/definitions/134.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-91d4cb8d-597f-45b2-9e96-1540169a2220",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when certain C functions, which are considered unsafe or deprecated, are used in the code. These functions can lead to security issues such as buffer overflows, format string vulnerabilities, and other undefined behaviors. The use of `fprintf` in the provided code snippet is not inherently unsafe, but it can be if the input is not properly validated or sanitized, especially when dealing with user-controlled data.\n\n### General Mitigation Advice\n\n1. **Input Validation and Sanitization**: Always validate and sanitize inputs before using them in functions like `fprintf` to prevent injection attacks.\n2. **Use Safer Alternatives**: Consider using safer alternatives provided by the C++ Standard Library, such as `std::cerr` for error messages.\n3. **Static Analysis Tools**: Use static analysis tools to detect the use of prohibited or unsafe functions in your codebase.\n4. **Code Review**: Regularly conduct code reviews to ensure that unsafe functions are not used and that all inputs are properly handled.\n\n### Source Code Fix Recommendation\n\nReplace the `fprintf` function with `std::cerr` to make use of C++'s type-safe and exception-aware I/O streams. Here's how you can modify the code:\n\n```cpp\n#include <iostream>\n#include <string>\n\nvoid printError(const std::string& prgname, const std::string& AER_VERSION) {\n    std::cerr << prgname << \" \" << AER_VERSION << \"\\n\"\n              << \"Copyright 2009 Intel Corporation.\\n\"\n              << \"Huang Ying <ying.huang@intel.com>\\n\"\n              << \"\\n\"\n              << \"This program is free software; you can redistribute it and/or\\n\"\n              << \"modify it under the terms of the GNU General Public License as\\n\"\n              << \"published by the Free Software Foundation; version 2 of the\\n\"\n              << \"License.\\n\";\n}\n```\n\n### Library Dependencies\n\nTo execute the modified code example properly, the following standard library is required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-e9bc659b-b996-4287-8d99-494ba3005786",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ refers to the use of certain C functions that are considered unsafe or deprecated due to their potential to cause security issues such as buffer overflows, format string vulnerabilities, or other undefined behaviors. These functions are often part of the C standard library and can lead to vulnerabilities if not used carefully.\n\n### General Mitigation Advice\n\n1. **Use Safer Alternatives**: Replace unsafe functions with safer alternatives that provide bounds checking or other safety features.\n2. **Input Validation**: Always validate input data to ensure it meets expected formats and sizes.\n3. **Code Review**: Regularly review code to identify and replace unsafe functions.\n4. **Static Analysis Tools**: Use static analysis tools to detect the use of prohibited functions and other potential vulnerabilities.\n\n### Source Code Fix Recommendation\n\nFor the specific vulnerability sink `fprintf(stderr, \"Error: \")`, consider the following fix:\n\n```cpp\n#include <iostream>\n#include <string>\n\nvoid logError(const std::string& message) {\n    std::cerr << \"Error: \" << message << std::endl;\n}\n\nint main() {\n    std::string errorMessage = \"An unexpected error occurred.\";\n    logError(errorMessage);\n    return 0;\n}\n```\n\n### Library Dependencies\n\nThe code example provided requires the following standard C++ library headers:\n\n- `<iostream>`\n- `<string>`\n\nThese headers are part of the C++ Standard Library and do not require additional installation.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-4ac85083-1394-48b2-b92c-befd7fbfb373",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when certain C functions, which are considered unsafe or deprecated, are used in the code. These functions can lead to security vulnerabilities such as buffer overflows, format string vulnerabilities, and other undefined behaviors. In the provided code snippet, the use of `fprintf` is not inherently unsafe, but it can be if not used carefully, especially when dealing with user input or untrusted data.\n\n### General Mitigation Advice\n\n1. **Use Safer Alternatives**: Prefer using safer functions or C++ standard library features that provide bounds checking and type safety.\n2. **Input Validation**: Always validate and sanitize inputs before using them in functions that format strings or handle buffers.\n3. **Compiler Warnings**: Enable compiler warnings to detect the use of deprecated or unsafe functions.\n4. **Static Analysis Tools**: Use static analysis tools to identify and mitigate the use of unsafe functions in the codebase.\n\n### Source Code Fix Recommendation\n\nIn this specific case, the use of `fprintf` is not directly a vulnerability, but to ensure safety, especially when dealing with user inputs, consider using C++ streams which provide better type safety and are less prone to format string vulnerabilities.\n\n```cpp\n#include <iostream>\n#include <string>\n\nvoid printUsage(const std::string& prgname) {\n    std::cerr << \"Usage: \" << prgname << \" [-s|--id=PCI_ID] [FILE]\\n\"\n              << \"  or:  \" << prgname << \" -v|--version\\n\"\n              << \"  or:  \" << prgname << \" -h|--help\\n\"\n              << \"Inject an error into a PCIe device\\n\"\n              << \"\\n\"\n              << \"  PCI_ID       The [<domain>:]<bus>:<slot>.<func> of the device in\\n\"\n              << \"               hex (same as lspci)\\n\"\n              << \"  FILE         Error data file (use stdin if omitted)\\n\";\n}\n```\n\n### Library Dependencies\n\nTo execute the code example properly, the following standard C++ library is required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n\n### OWASP Resources\n\n- [OWASP C++ Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)\n- [CWE-134: Use of Externally-Controlled Format String](https://cwe.mitre.org/data/definitions/134.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-19029544-8c85-439b-a350-94d057a9f329",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "util.c"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 28,
+                  "endLine": 29,
+                  "endColumn": 36,
+                  "charOffset": 659,
+                  "charLength": 8,
+                  "snippet": {
+                    "text": "strerror",
+                    "rendered": {
+                      "text": "strerror",
+                      "markdown": "`strerror`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-8ec65f01-1e72-4209-b1a9-c72fc280322e",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "util.c"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 2,
+                  "endLine": 29,
+                  "endColumn": 9,
+                  "charOffset": 633,
+                  "charLength": 7,
+                  "snippet": {
+                    "text": "fprintf",
+                    "rendered": {
+                      "text": "fprintf",
+                      "markdown": "`fprintf`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-b0cce82c-eea0-40ea-ab74-effc68878c58",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "util.c"
+                },
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 2,
+                  "endLine": 31,
+                  "endColumn": 9,
+                  "charOffset": 685,
+                  "charLength": 7,
+                  "snippet": {
+                    "text": "fprintf",
+                    "rendered": {
+                      "text": "fprintf",
+                      "markdown": "`fprintf`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-4ce8bb99-bea4-43ff-bdd1-2314e2e36652",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "util.c"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1,
+                  "endLine": 27,
+                  "endColumn": 9,
+                  "charOffset": 592,
+                  "charLength": 8,
+                  "snippet": {
+                    "text": "vfprintf",
+                    "rendered": {
+                      "text": "vfprintf",
+                      "markdown": "`vfprintf`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-91d4cb8d-597f-45b2-9e96-1540169a2220",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "aer-inject.c"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 7,
+                  "endLine": 48,
+                  "endColumn": 14,
+                  "charOffset": 1140,
+                  "charLength": 7,
+                  "snippet": {
+                    "text": "fprintf",
+                    "rendered": {
+                      "text": "fprintf",
+                      "markdown": "`fprintf`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-e9bc659b-b996-4287-8d99-494ba3005786",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "util.c"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 1,
+                  "endLine": 25,
+                  "endColumn": 8,
+                  "charOffset": 543,
+                  "charLength": 7,
+                  "snippet": {
+                    "text": "fprintf",
+                    "rendered": {
+                      "text": "fprintf",
+                      "markdown": "`fprintf`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-4ac85083-1394-48b2-b92c-befd7fbfb373",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "aer-inject.c"
+                },
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 7,
+                  "endLine": 34,
+                  "endColumn": 14,
+                  "charOffset": 739,
+                  "charLength": 7,
+                  "snippet": {
+                    "text": "fprintf",
+                    "rendered": {
+                      "text": "fprintf",
+                      "markdown": "`fprintf`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
